@@ -15,7 +15,7 @@ namespace Ethereal.Client.Views
         private ContentManager Content;
         private List<UIObject> _objects;
         private TextureAtlas _UIAtlas;
-        private ScrollBar scrollBar;
+        private UIWindow UIWindow;
         public IntroWindow(SpriteBatch _spriteBatch, ContentManager content) : base(_spriteBatch, content)
         {
             this._spriteBatch = _spriteBatch;
@@ -54,7 +54,6 @@ namespace Ethereal.Client.Views
                 if(CheckForButtonInput(children)) return;
                 _objects[i].Update();
             }
-            scrollBar.MoveScrollBar(1);
             base.Update(gameTime);
         }
 
@@ -168,10 +167,8 @@ namespace Ethereal.Client.Views
         public void LoadIntroScreen()
         {
             _objects.Clear();
-            scrollBar = new ScrollBar("SideBar");
-            scrollBar.SetInteractionArea(new Rectangle(100, 150, 100, 450));
-            scrollBar.SetScrollBarLength(10);
-            _objects.Add(scrollBar);
+            UIWindow = new UIWindow("Inventory1", 25, new Rectangle(100,100,300,300));
+            _objects.Add(UIWindow);
             Panel loginMenu = new Panel("LoginMenu", 1, 1, 6);
             loginMenu.CenterObjectOnScreen();
             _objects.Add(loginMenu);

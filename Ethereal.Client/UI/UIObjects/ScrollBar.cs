@@ -13,14 +13,24 @@ namespace Ethereal.Client.UI.UIObjects
         private Rectangle _scrollArea;
         private int _scrollBarPosition = 0;
         private int _scrollBarHeight = 0;
-        public ScrollBar(string objectName) : base(objectName)
+        public ScrollBar(string objectName , Rectangle interactionArea) : base(objectName)
         {
             _scrollUp = new Button("ScrollUp", ButtonActions.None, 1, false);
             _scrollDown = new Button("_scrollDown", ButtonActions.None, 1, false);
             _scrollBarSlider = new Button("_scrollBarSlider", ButtonActions.None, 1, false);
             _interactionArea = new Rectangle();
+            AlignScrollbar(interactionArea);
         }
-
+        public void AlignScrollbar(Rectangle interactionArea)
+        {
+            _interactionArea = interactionArea;
+            Rectangle _scrollUpRec = new Rectangle(interactionArea.X, interactionArea.Y, interactionArea.Width, interactionArea.Height / 10);
+            _scrollUp.SetInteractionArea(_scrollUpRec);
+            Rectangle _scrollDownRec = new Rectangle(interactionArea.X, (interactionArea.Y) + interactionArea.Height - (interactionArea.Height / 10), interactionArea.Width, interactionArea.Height / 10);
+            _scrollDown.SetInteractionArea(_scrollDownRec);
+            _scrollArea = new Rectangle(interactionArea.X, interactionArea.Y + _scrollUpRec.Height, interactionArea.Width, interactionArea.Height - _scrollUpRec.Height - _scrollDownRec.Height);
+            _scrollBarSlider.SetInteractionArea(_scrollArea);
+        }
         public override void SetInteractionArea(Rectangle interactionArea)
         {
             _interactionArea = interactionArea;

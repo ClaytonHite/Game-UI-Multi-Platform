@@ -57,14 +57,29 @@ namespace Ethereal.Client.Source.Engine
         {
             _spriteBatch.End();
             //Set up the spritebatch to draw using scissoring (for text cropping)
-            _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
-                              null, null, _rasterizerState);
+            _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, _rasterizerState);
             //Copy the current scissor rect so we can restore it after
             Rectangle currentRect = _spriteBatch.GraphicsDevice.ScissorRectangle;
             //Set the current scissor rectangle
             _spriteBatch.GraphicsDevice.ScissorRectangle = interactionRectangle;
             //Draw the text at the top left of the scissor rectangle
             _spriteBatch.DrawString(font, text, position, color);
+            //Reset scissor rectangle to the saved value
+            _spriteBatch.GraphicsDevice.ScissorRectangle = currentRect;
+            _spriteBatch.End();
+            _spriteBatch.Begin();
+        }
+        public void Draw(Rectangle image, int index, Color color, Rectangle scissorRectangle)
+        {
+            _spriteBatch.End();
+            //Set up the spritebatch to draw using scissoring (for text cropping)
+            _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, _rasterizerState);
+            //Copy the current scissor rect so we can restore it after
+            Rectangle currentRect = _spriteBatch.GraphicsDevice.ScissorRectangle;
+            //Set the current scissor rectangle
+            _spriteBatch.GraphicsDevice.ScissorRectangle = scissorRectangle;
+            //Draw the text at the top left of the scissor rectangle
+            _spriteBatch.Draw(Texture, image, _sourceRectangles[index], color);
             //Reset scissor rectangle to the saved value
             _spriteBatch.GraphicsDevice.ScissorRectangle = currentRect;
             _spriteBatch.End();

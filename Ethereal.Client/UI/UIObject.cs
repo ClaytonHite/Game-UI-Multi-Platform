@@ -34,7 +34,7 @@ namespace Ethereal.Client.UI
         private bool _capitalize = false;
 
         //Positioning
-        private Rectangle _interactionArea;
+        public Rectangle InteractionArea { get; set; }
         public UIObject(string objectName)
         {
             ObjectName = objectName;
@@ -236,9 +236,9 @@ namespace Ethereal.Client.UI
 
         public virtual Rectangle GetInteractionArea()
         {
-            if (_interactionArea != Rectangle.Empty)
+            if (InteractionArea != Rectangle.Empty)
             {
-                return _interactionArea;
+                return InteractionArea;
             }
             return new Rectangle();
         }
@@ -294,7 +294,7 @@ namespace Ethereal.Client.UI
 
         public virtual void SetInteractionArea(Rectangle interactionArea)
         {
-            _interactionArea = interactionArea;
+            InteractionArea = interactionArea;
             /*float locationX = (float)interactionArea.X / (float)Globals.ScreenWidth;
             float locationY = (float)interactionArea.Y / (float)Globals.ScreenHeight;
             float SizeX = (float)interactionArea.Width / (float)Globals.ScreenWidth;
