@@ -88,7 +88,6 @@ namespace Ethereal.Client.Source.Engine.Input
         {
             newMouse = Mouse.GetState();
             newMousePos = GetScreenPos(newMouse);
-
         }
 
 
@@ -186,11 +185,6 @@ namespace Ethereal.Client.Source.Engine.Input
             }
 
             return false;
-        }
-
-        public void SetFirst()
-        {
-
         }
     }
 }

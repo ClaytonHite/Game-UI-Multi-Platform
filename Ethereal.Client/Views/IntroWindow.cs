@@ -167,8 +167,6 @@ namespace Ethereal.Client.Views
         public void LoadIntroScreen()
         {
             _objects.Clear();
-            UIWindow = new UIWindow("Inventory1", 25, new Rectangle(100,100,300,300));
-            _objects.Add(UIWindow);
             Panel loginMenu = new Panel("LoginMenu", 1, 1, 6);
             loginMenu.CenterObjectOnScreen();
             _objects.Add(loginMenu);
@@ -180,6 +178,8 @@ namespace Ethereal.Client.Views
             objs.Add(new Button("MapEditor", ButtonActions.MapEditor, 1, true));
             objs.Add(new Button("SpriteEditor", ButtonActions.SpriteEditor, 1, true));
             RegisterObjectInGrid(loginMenu, objs);
+            UIWindow = new UIWindow("Inventory1", 25, new Rectangle(100, 100, 300, 300));
+            _objects.Add(UIWindow);
             LoadContent();
         }
 
